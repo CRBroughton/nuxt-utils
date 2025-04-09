@@ -1,6 +1,6 @@
 {
   "name": "@crbroughton/nuxt-utils",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A collection of useful nuxt utilities and composables",
   "author": "Craig R Broughton",
   "license": "MIT",
