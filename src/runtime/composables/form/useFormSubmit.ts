@@ -33,9 +33,19 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
     submitCount.value++
 
     try {
-      // Validate form data
-      const validData = await validate()
+      // Try to validate
+      let validData: T
+      try {
+        validData = await validate()
+      }
+      catch {
+        // Validation errors are already handled in the validate function
+        // via onValidationError callback, so we just exit here
+        isSubmitting.value = false
+        return
+      }
 
+      // If we get here, validation passed
       // Transform data if needed
       const transformedData = transformValues(validData)
 
@@ -52,6 +62,7 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
           return submissionResult
         }
         catch (error) {
+          // This is a submission error, not a validation error
           if (onError) {
             onError(error)
           }
@@ -60,6 +71,7 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
       }
     }
     catch (error) {
+      // Only non-validation errors should reach here
       if (onError) {
         onError(error)
       }
@@ -69,7 +81,6 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
       isSubmitting.value = false
     }
   }
-
   // Reset submission state
   const resetSubmission = () => {
     isSubmitting.value = false
