@@ -1,4 +1,4 @@
-import { ref, type Ref } from 'vue'
+import { computed, ref, type Ref } from 'vue'
 import type {
   NestedPaths,
   PathValue,
@@ -49,10 +49,10 @@ export function useFormState<T extends Record<string, unknown>>(
 
   // Create v-model compatible binder for a field
   const fieldBinder = <P extends NestedPaths<T>>(path: P) => {
-    return {
+    return computed({
       get: () => getValueByPath(values.value, path as string) as PathValue<T, P>,
       set: (value: PathValue<T, P>) => setFieldValue(path, value),
-    }
+    })
   }
 
   return {

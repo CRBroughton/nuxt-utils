@@ -1,4 +1,4 @@
-import type { Ref } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import type { z } from 'zod'
 
 // Utility type to get all possible nested paths in an object type
@@ -39,11 +39,7 @@ export interface FormState<T> {
   touchField: <P extends NestedPaths<T>>(path: P) => void
   resetValues: (newValues?: T) => void
   touched: Ref<TouchedFields<T>>
-  // Add binding utility for v-model
-  fieldBinder: <P extends NestedPaths<T>>(path: P) => {
-    get: () => PathValue<T, P>
-    set: (value: PathValue<T, P>) => void
-  }
+  fieldBinder: <P extends NestedPaths<T>>(path: P) => ComputedRef<PathValue<T, P>>
 }
 
 // Validation result interface

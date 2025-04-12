@@ -48,6 +48,7 @@ const {
   values,
   errors,
   isSubmitting,
+  touched,
   submitted,
   submitForm,
   fieldBinder,
@@ -58,7 +59,6 @@ const {
 } = useForm({
   initialValues: initialValues.value,
   schema: userFormSchema,
-  validateOnChange: true,
 
   // Optional transform before submission
   transform: values => ({
@@ -107,11 +107,11 @@ const {
 
 // Create reactive refs for each field using the fieldBinder
 // All these are now fully type-safe
-const name = computed(fieldBinder('name'))
-const email = computed(fieldBinder('email'))
-const age = computed(fieldBinder('age'))
-const newsletter = computed(fieldBinder('preferences.newsletter'))
-const theme = computed(fieldBinder('preferences.theme'))
+const name = fieldBinder('name')
+const email = fieldBinder('email')
+const age = fieldBinder('age')
+const newsletter = fieldBinder('preferences.newsletter')
+const theme = fieldBinder('preferences.theme')
 
 // Handler for form submission
 const handleSubmit = async () => {
@@ -297,6 +297,7 @@ const handleSubmit = async () => {
         >
           <summary>Form State</summary>
           <pre>{{ {
+            touched,
             errors,
             isSubmitting,
             submitted,
