@@ -11,6 +11,7 @@ export default defineNuxtModule({
 
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
+      dirs.push(resolve(runtimeDir, 'composables/form'))
     })
   },
 })
