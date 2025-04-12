@@ -32,6 +32,9 @@ export function useZodValidation<T extends Record<string, unknown>>(
     return formErrors
   }
 
+  // TODO - adjust validator to better catch
+  // zod related errors and surface them
+
   // Validate the entire form
   const validate = async (): Promise<T> => {
     try {
