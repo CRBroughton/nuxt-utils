@@ -15,6 +15,7 @@ export function useZodValidation<T extends Record<string, unknown>>(
   const { values, schema, touched, submitted, onValidationError } = options
 
   const errors = ref<FormErrors<T>>({}) as Ref<FormErrors<T>>
+  const errorMessage = ref('')
   const isValid = ref(true)
 
   // Parse Zod validation errors into a user-friendly format
@@ -124,6 +125,7 @@ export function useZodValidation<T extends Record<string, unknown>>(
 
   return {
     errors,
+    errorMessage,
     isValid,
     validate,
     validateField,

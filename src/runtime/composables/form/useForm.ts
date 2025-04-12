@@ -111,6 +111,7 @@ export function useForm<T extends Record<string, unknown>, R = unknown>(
 
     // Submission state
     isSubmitting: submission.isSubmitting,
+    successMessage: submission.successMessage,
     submitted: submission.submitted,
     submitCount: submission.submitCount,
     result: submission.result,
@@ -127,6 +128,7 @@ export function useForm<T extends Record<string, unknown>, R = unknown>(
     validate: validation.validate,
     validateField: validation.validateField,
     submitForm: submission.submitForm,
+    errorMessage: validation.errorMessage,
     resetForm,
   }
 }

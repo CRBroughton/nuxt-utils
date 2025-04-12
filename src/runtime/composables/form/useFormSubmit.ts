@@ -12,7 +12,7 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
   options: FormSubmitOptions<T, R>,
 ): FormSubmission<R> {
   const { validate, onSubmit, transform, onSuccess, onError } = options
-
+  const successMessage = ref('')
   const isSubmitting = ref(false)
   const submitted = ref(false)
   const submitCount = ref(0)
@@ -91,6 +91,7 @@ export function useFormSubmit<T extends Record<string, unknown>, R = unknown>(
 
   return {
     isSubmitting,
+    successMessage,
     submitted,
     submitCount,
     result,

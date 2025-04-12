@@ -45,6 +45,7 @@ export interface FormState<T> {
 // Validation result interface
 export interface ValidationResult<T> {
   errors: Ref<FormErrors<T>>
+  errorMessage: Ref<string>
   isValid: Ref<boolean>
   validate: () => Promise<T>
   validateField: <P extends NestedPaths<T>>(path: P) => Promise<boolean>
@@ -57,6 +58,7 @@ export interface ValidationResult<T> {
 // Form submission interface
 export interface FormSubmission<R = unknown> {
   isSubmitting: Ref<boolean>
+  successMessage: Ref<string>
   submitted: Ref<boolean>
   submitCount: Ref<number>
   result: Ref<R | null>

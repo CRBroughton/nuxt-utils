@@ -38,10 +38,6 @@ const initialValues = ref<UserFormData>({
   },
 })
 
-// Success and error messages
-const successMessage = ref('')
-const errorMessage = ref('')
-
 // Use our form composable
 const {
   result,
@@ -49,6 +45,8 @@ const {
   errors,
   isSubmitting,
   touched,
+  successMessage,
+  errorMessage,
   submitted,
   submitForm,
   fieldBinder,
