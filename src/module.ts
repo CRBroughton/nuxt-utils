@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { defineNuxtModule, createResolver } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addComponentsDir } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
@@ -11,6 +11,10 @@ export default defineNuxtModule({
 
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
+    })
+
+    addComponentsDir({
+      path: resolve('runtime/components'),
     })
   },
 })
