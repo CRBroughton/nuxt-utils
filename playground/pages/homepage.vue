@@ -3,11 +3,10 @@
     <h1>Home Page</h1>
     <ViewTransition
       ref="viewTransition"
-      to="detail"
     >
       <Card style="view-transition-name: shared-box" />
     </ViewTransition>
-    <button @click="viewTransition?.navigate">
+    <button @click="viewTransition?.navigate('/detail')">
       Go to Detail Page
     </button>
   </div>

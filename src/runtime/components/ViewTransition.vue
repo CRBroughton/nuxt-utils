@@ -5,9 +5,6 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
 
-const { to } = defineProps<{
-  to?: string
-}>()
 const isSupported = ref(false)
 
 onMounted(() => {
@@ -26,7 +23,7 @@ function startTransition(callback: () => void) {
   })
 }
 
-function navigate() {
+function navigate(to: string) {
   if (isSupported.value === true) {
     startTransition(() => {
       navigateTo(to)

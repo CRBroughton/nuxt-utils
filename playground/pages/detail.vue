@@ -1,21 +1,15 @@
 <template>
   <div class="page">
     <h1>Home Page</h1>
-    {{
-
-viewTransition?.isSupported
-
-    }}
     <ViewTransition
       ref="viewTransition"
-      to="homepage"
     >
       <Card
         class="card"
         style="view-transition-name: shared-box"
       />
     </ViewTransition>
-    <button @click="viewTransition?.navigate">
+    <button @click="viewTransition?.navigate('/homepage')">
       Go to Homepage Page
     </button>
   </div>
