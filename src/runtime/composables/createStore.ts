@@ -88,18 +88,18 @@ export const createStore = <
    * Contains only the state and functions - useful for testing or non-component usage
    *
    * @param initialState - Object containing the initial state values
-   * @returns The initialized store state and functions
+   * @returns The initialised store state and functions
    */
   const createRawStore = (initialState?: State): Store => {
     return init(initialState)
   }
 
   /**
-   * Initializes the store, makes it available to child components via Vue's inject/provide,
+   * Initialises the store, makes it available to child components via Vue's inject/provide,
    * and returns the store instance
    *
    * @param initialState - Object containing the initial state values
-   * @returns The initialized store instance
+   * @returns The initialised store instance
    */
   const provideStore = (initialState?: State): Store => {
     const service = createRawStore(initialState)
