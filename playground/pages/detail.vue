@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <h1>Home Page</h1>
+    <h1>Detail Page</h1>
     <ViewTransition
       ref="viewTransition"
     >

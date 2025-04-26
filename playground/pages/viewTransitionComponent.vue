@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ViewTransition ref="transition">
+    <ViewTransition ref="viewTransition">
       <div class="transition-container">
         <div
           v-if="show"
@@ -24,11 +24,11 @@
 
 <script setup lang="ts">
 const show = ref(true)
-const transition = useTemplateRef('transition')
+const viewTransition = useTemplateRef('viewTransition')
 
 function toggle() {
-  if (transition.value) {
-    transition.value.startTransition(() => {
+  if (viewTransition.value) {
+    viewTransition.value.startTransition(() => {
       show.value = !show.value
     })
   }
