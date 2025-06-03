@@ -1,9 +1,11 @@
-import { ref, watch } from 'vue'
+import { ref, watch, type Ref } from 'vue'
 import type { z } from 'zod'
 import type { NestedPaths, PathValue } from './types'
 import { useFormState } from './useFormState'
 import { useZodValidation } from './useZodValidation'
 import { useFormSubmit } from './useFormSubmit'
+import { useFormQuery, type UseFormQueryOptions } from './useFormQuery'
+import { getValueByPath } from './utils'
 
 export interface UseFormOptions<T, R> {
   // Initial values for the form
@@ -131,4 +133,71 @@ export function useForm<T extends Record<string, unknown>, R = unknown>(
     errorMessage: validation.errorMessage,
     resetForm,
   }
+}
+
+// Add to useForm.ts
+
+export interface UseFormWithQueryOptions<T, R> extends UseFormOptions<T, R> {
+  // Query-specific options
+  queryOptions?: Omit<UseFormQueryOptions<T>, 'values' | 'updateValues'>
+}
+
+export function useFormWithQuery<T extends Record<string, unknown>, R = unknown>(
+  options: UseFormWithQueryOptions<T, R>,
+) {
+  // If queryOptions is provided, handle URL parameters
+  if (options.queryOptions) {
+    // Get initial values from URL to merge with form's initial values
+    const formQuery = useFormQuery<T>({
+      // This is just a temporary ref for initialization
+      values: ref(options.initialValues) as Ref<T>,
+      ...options.queryOptions,
+    })
+
+    // Merge URL values with initial values
+    const urlValues = formQuery.initialValuesFromUrl<T>()
+    const mergedInitialValues = {
+      ...options.initialValues,
+      ...urlValues,
+    }
+
+    // Create the form with merged initial values
+    const form = useForm<T, R>({
+      ...options,
+      initialValues: mergedInitialValues,
+    })
+
+    // Now create the real query handler with the form's values
+    const query = useFormQuery<T>({
+      values: form.values,
+      updateValues: (newValues) => {
+        // Update form values without full validation
+        Object.entries(newValues).forEach(([key, value]) => {
+          const path = key as NestedPaths<T>
+          const currentValue = getValueByPath(form.values.value, key)
+
+          // Only update if value changed to avoid circular updates
+          if (JSON.stringify(currentValue) !== JSON.stringify(value)) {
+            form.setFieldValue(path, value as PathValue<T, typeof path>, false)
+          }
+        })
+      },
+      ...options.queryOptions,
+    })
+
+    // Enhanced reset that also clears URL
+    const resetFormAndQuery = () => {
+      form.resetForm()
+      query.clearUrlParams()
+    }
+
+    return {
+      ...form,
+      query,
+      resetForm: resetFormAndQuery,
+    }
+  }
+
+  // If no queryOptions, just return regular form
+  return useForm<T, R>(options)
 }
