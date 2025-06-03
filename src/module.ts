@@ -1,13 +1,15 @@
 import { fileURLToPath } from 'node:url'
-import { defineNuxtModule, createResolver, addComponentsDir, addPlugin } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addComponentsDir, addPlugin, installModule } from '@nuxt/kit'
 
 export default defineNuxtModule({
   meta: {
     name: 'nuxt-utils',
   },
-  setup(_options, nuxt) {
+  async setup(_options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
+
+    await installModule('@vueuse/nuxt')
 
     nuxt.hook('imports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))

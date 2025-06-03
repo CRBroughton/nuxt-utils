@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ['../src/module'],
+  modules: ['../src/module', '@vueuse/nuxt', '@vueuse/motion/nuxt'],
   devtools: { enabled: true },
   app: {
     pageTransition: false, // Disable Nuxt's built-in page transitions

@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import { navigateTo } from '#app'
 
 const emit = defineEmits<{
   'transition-start': []
