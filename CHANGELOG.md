@@ -1,5 +1,13 @@
 # @crbroughton/nuxt-utils
 
+## 0.2.1
+
+### Patch Changes
+
+- 6a41b7c: import missing defineNuxtPlugin
+- a9af005: change genericButton to div to avoid hydration issues
+- 1cc13e6: bump version to nuxt 4
+
 ## 0.2.0
 
 ### Minor Changes

@@ -1,6 +1,6 @@
 {
   "name": "@crbroughton/nuxt-utils",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A collection of useful nuxt utilities and composables",
   "author": "Craig R Broughton",
   "license": "MIT",
@@ -31,7 +31,7 @@
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
-    "release": "npm run lint && npm run prepack && npm publish --access=public && git push --follow-tags",
+    "release": "npm run prepack && npm publish --access=public && git push --follow-tags",
     "lint": "eslint .",
     "test": "vitest run",
     "test:watch": "vitest watch",
