@@ -11,6 +11,6 @@
     "@vueuse/core": "^13.2.0",
     "@vueuse/motion": "^3.0.3",
     "@vueuse/nuxt": "^13.2.0",
-    "nuxt": "^3.16.2"
+    "nuxt": "^4.0.1"
   }
 }
