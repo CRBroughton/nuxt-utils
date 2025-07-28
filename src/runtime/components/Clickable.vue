@@ -1,32 +1,35 @@
 <script setup lang="ts">
 const {
   disabled = false,
-  type = 'button',
   ariaLabel,
 } = defineProps<{
   disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
   ariaLabel?: string
 }>()
 
 const emit = defineEmits<{
   click: [event: MouseEvent]
 }>()
+
+function handleClick(event: MouseEvent) {
+  if (disabled) return
+  emit('click', event)
+}
 </script>
 
 <template>
-  <button
-    :type
+  <div
     :disabled
     :aria-label
-    @click="emit('click', $event)"
+    :style="{ cursor: disabled ? 'not-allowed' : 'pointer' }"
+    @click="handleClick"
   >
     <slot />
-  </button>
+  </div>
 </template>
 
 <style scoped>
-button {
+div {
   background: none;
   border: none;
   margin: 0;
@@ -34,10 +37,5 @@ button {
   font: inherit;
   color: inherit;
   text-decoration: inherit;
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
 }
 </style>
